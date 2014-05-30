@@ -1,0 +1,73 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:w="urn:import:com.jitlogic.zico.widgets.client">
+    <ui:style>
+        .interior {
+            margin-left:  2px;
+            margin-right: 2px;
+        }
+        .toolbar {
+            display: flex;
+            border-bottom: 1px solid #ccc;
+            align-items: center;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: default;
+        }
+        .toolitem {
+            flex: 0 1 auto;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+            color: #666;
+            cursor: pointer;
+        }
+        .toolitem a {
+            color: #666;
+            text-decoration: none;
+        }
+        .toolitem:hover {
+            background: #eef;
+        }
+        .toolfill {
+            flex: 10;
+            text-align: center;
+            padding-top: 4px;
+            padding-bottom: 4px;
+        }
+    </ui:style>
+
+    <g:DockLayoutPanel unit="PX">
+        <g:north size="24">
+            <g:HTMLPanel>
+                <div class="{style.toolbar}">
+                    <div class="{style.toolitem}">
+                        <g:Hyperlink ui:field="lnkHelp">Help</g:Hyperlink>
+                    </div>
+                    <div class="{style.toolfill}">
+                        <g:Label>ZICO Widgets Demo 0.0.1-SNAPSHOT</g:Label>
+                    </div>
+                    <div class="{style.toolitem}">
+                        <g:Label ui:field="lblUserInfo">...</g:Label>
+                    </div>
+                </div>
+            </g:HTMLPanel>
+        </g:north>
+        <g:center>
+            <g:TabLayoutPanel barHeight="26" ui:field="tabPanel">
+                <g:tab>
+                    <g:header>Summary Graphs</g:header>
+                    <g:Label>Summary graph here</g:Label>
+                </g:tab>
+            </g:TabLayoutPanel>
+        </g:center>
+        <g:south size="24">
+            <w:StatusBar ui:field="statusBar"/>
+        </g:south>
+    </g:DockLayoutPanel>
+</ui:UiBinder>

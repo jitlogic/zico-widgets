@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='Demo'>
+    <inherits name='com.google.gwt.user.User' />
+    <inherits name="com.jitlogic.zico.widgets.Widgets"/>
+    <entry-point class='com.jitlogic.zico.widgets.demo.client.Demo' />
+    <source path='client' />
+</module>
