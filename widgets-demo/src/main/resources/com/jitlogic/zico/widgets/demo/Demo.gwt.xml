@@ -2,6 +2,8 @@
 <module rename-to='Demo'>
     <inherits name='com.google.gwt.user.User' />
     <inherits name="com.jitlogic.zico.widgets.Widgets"/>
+    <inherits name="org.fusesource.restygwt.RestyGWT"/>
+    <inherits name="com.google.gwt.inject.Inject"/>
     <entry-point class='com.jitlogic.zico.widgets.demo.client.Demo' />
     <source path='client' />
 </module>

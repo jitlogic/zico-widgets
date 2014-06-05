@@ -1,6 +1,7 @@
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:w="urn:import:com.jitlogic.zico.widgets.client">
+             xmlns:w='urn:import:com.jitlogic.zico.widgets.client'
+             xmlns:v='urn:import:com.jitlogic.zico.widgets.demo.client.views'>
     <ui:style>
         .interior {
             margin-left:  2px;
@@ -61,8 +62,8 @@
         <g:center>
             <g:TabLayoutPanel barHeight="26" ui:field="tabPanel">
                 <g:tab>
-                    <g:header>Summary Graphs</g:header>
-                    <g:Label>Summary graph here</g:Label>
+                    <g:header>Users</g:header>
+                    <v:UserManagementPanel ui:field="userManagementPanel"/>
                 </g:tab>
             </g:TabLayoutPanel>
         </g:center>

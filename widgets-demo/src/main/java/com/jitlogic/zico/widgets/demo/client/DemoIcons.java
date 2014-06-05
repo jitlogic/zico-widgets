@@ -16,26 +16,34 @@
 
 package com.jitlogic.zico.widgets.demo.client;
 
-import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.jitlogic.zico.widgets.client.WidgetResources;
-import com.jitlogic.zico.widgets.client.ZicoDataGridResources;
-import com.jitlogic.zico.widgets.demo.client.inject.DemoClientGinjector;
+import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.ImageResource;
 
-public class Demo implements EntryPoint {
+public interface DemoIcons extends ClientBundle {
 
-    static {
-        ZicoDataGridResources.INSTANCE.dataGridStyle().ensureInjected();
-        WidgetResources.INSTANCE.formCss().ensureInjected();
-        WidgetResources.INSTANCE.toolBarCss().ensureInjected();
-    }
+    public static final DemoIcons INSTANCE = GWT.create(DemoIcons.class);
 
-    private Shell shell;
-    private DemoClientGinjector injector = GWT.create(DemoClientGinjector.class);
+    @Source("images/add.png")
+    ImageResource addIcon();
 
-    public void onModuleLoad() {
-        shell = injector.getShell();
-        RootLayoutPanel.get().add(shell);
-    }
+    @Source("images/edit.png")
+    ImageResource editIcon();
+
+    @Source("images/refresh.png")
+    ImageResource refreshIcon();
+
+    @Source("images/remove.png")
+    ImageResource removeIcon();
+
+    @Source("images/key.png")
+    ImageResource keyIcon();
+
+    @Source("images/dialog-ok.png")
+    ImageResource dialogOkIcon();
+
+    @Source("images/dialog-cancel.png")
+    ImageResource dialogCancelIcon();
+
+
 }

@@ -3,6 +3,7 @@
 
 
 @def selectionBorderWidth 2px;
+
 .dataGridWidget {
 
 }
@@ -44,12 +45,36 @@
      padding: 2px 13px;
      overflow: hidden;
      white-space: nowrap;
-     vertical-align: top;
+     vertical-align: middle;
      -moz-user-select: none;
      -webkit-user-select: none;
      -khtml-user-select: none;
      user-select: none;
      -ms-user-select: none;
+}
+
+.dataGridCell select {
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    background-color: white;
+    border: 1px solid #ccc;
+    margin-right: -20px;
+    overflow: hidden;
+    width: 100%;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    cursor: pointer;
+}
+
+.dataGridCell input {
+    font-family: tahoma,arial,verdana,sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 100%;
 }
 
 .dataGridFirstColumnFooter {

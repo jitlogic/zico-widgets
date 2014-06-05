@@ -23,10 +23,13 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Singleton;
 import com.jitlogic.zico.widgets.client.StatusBar;
+import com.jitlogic.zico.widgets.demo.client.views.UserManagementPanel;
 
+import javax.inject.Inject;
 
-
+@Singleton
 public class Shell extends Composite {
     interface ShellUiBinder extends UiBinder<Widget, Shell> { }
     private static ShellUiBinder ourUiBinder = GWT.create(ShellUiBinder.class);
@@ -40,14 +43,18 @@ public class Shell extends Composite {
     @UiField(provided = true)
     StatusBar statusBar;
 
+    @UiField(provided = true)
+    UserManagementPanel userManagementPanel;
+
     private static final String MCS = "SHELL";
 
-
-    public Shell(final StatusBar statusBar) {
+    @Inject
+    public Shell(StatusBar statusBar, UserManagementPanel userManagementPanel) {
         this.statusBar = statusBar;
+        this.userManagementPanel = userManagementPanel;
         initWidget(ourUiBinder.createAndBindUi(this));
 
-        statusBar.info(MCS, "Getting user information...");
+        //statusBar.info(MCS, "Getting user information...");
     }
 }
 
