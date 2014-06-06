@@ -42,10 +42,7 @@ import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
 
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class UserManagementPanel extends Composite {
     interface UserManagementPanelUiBinder extends UiBinder<DockLayoutPanel, UserManagementPanel> { }
@@ -154,19 +151,19 @@ public class UserManagementPanel extends Composite {
         userGrid.addColumn(colUsername, new ResizableHeader<UserInfo>("Username", userGrid, colUsername));
         userGrid.setColumnWidth(colUsername, 128, Style.Unit.PX);
 
-        final List<String> roles = Arrays.asList("VIEWER", "ADMIN");
+        Map<String,Integer> roles = ZicoWidgets.map("VIEWER", 1, "ADMIN", 2);
 
-        final SelectionCell cellRoles = new SelectionCell(roles);
-        Column<UserInfo,String> colUserRole = new Column<UserInfo, String>(cellRoles) {
+        final SelectCell<String,Integer> cellRoles = new SelectCell<String, Integer>(roles);
+        Column<UserInfo,Integer> colUserRole = new Column<UserInfo, Integer>(cellRoles) {
             @Override
-            public String getValue(UserInfo user) {
-                return roles.get(user.getRole()-1);
+            public Integer getValue(UserInfo user) {
+                return user.getRole();
             }
         };
-        colUserRole.setFieldUpdater(new FieldUpdater<UserInfo, String>() {
-            public void update(int index, UserInfo user, String value) {
+        colUserRole.setFieldUpdater(new FieldUpdater<UserInfo, Integer>() {
+            public void update(int index, UserInfo user, Integer value) {
                 markChange(user);
-                user.setRole(roles.indexOf(value)+1);
+                user.setRole(value);
                 cellRoles.clearViewData(user.getId());
             }
         });
