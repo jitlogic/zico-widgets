@@ -21,28 +21,25 @@ import com.google.inject.Singleton;
 import org.fusesource.restygwt.client.MethodCallback;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 @Singleton
 public class UserService {
 
-    private List<UserInfo> users;
+    private Map<Integer, UserInfo> users;
 
     @Inject
     public UserService() {
-        users = new ArrayList<UserInfo>();
-        users.addAll(Arrays.asList(
-            mku(1, "test", "Test User", UserInfo.VIEWER, "Pastuch"),
-            mku(2, "other", "Other user", UserInfo.ADMIN, "Administrajtor")
-        ));
+        users = new TreeMap<Integer, UserInfo>();
+
+        users.put(1, mku(1, "test", "Test User", UserInfo.VIEWER, "Pastuch"));
+        users.put(2, mku(2, "other", "Other user", UserInfo.ADMIN, "Administrajtor"));
     }
 
 
     public void list(final MethodCallback<List<UserInfo>> cb) {
         final List<UserInfo> lst = new ArrayList<UserInfo>();
-        for (UserInfo u : users) {
+        for (UserInfo u : users.values()) {
             lst.add(copy(u));
         }
 
@@ -50,6 +47,18 @@ public class UserService {
             @Override
             public void run() {
                 cb.onSuccess(null, lst);
+            }
+        }.schedule(10);
+    }
+
+
+    public void update(int id, UserInfo user, final MethodCallback<Void> cb) {
+        users.put(id, copy(user));
+
+        new Timer() {
+            @Override
+            public void run() {
+                cb.onSuccess(null, null);
             }
         }.schedule(10);
     }

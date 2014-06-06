@@ -41,75 +41,28 @@ public class SelectCell<T,V> extends AbstractInputCell<V, V> {
 
     public static final Template DEFAULT_TEMPLATE = GWT.create(Template.class);
 
-    public static interface SelectAdapter<T,V> {
-
-        String description(T o);
-
-        V value(T o);
-    }
-
-
-    public static class MapAdapter<T,V> implements SelectAdapter<T,V> {
-
-        private Map<T,V> options;
-
-        public MapAdapter(Map<T,V> options) {
-            this.options = options;
-        }
-
-
-        @Override
-        public String description(T o) {
-            return o.toString();
-        }
-
-        @Override
-        public V value(T obj) {
-            return options.get(obj);
-        }
-    }
-
-
     private Template template;
 
     private List<T> options = new ArrayList<T>();
     private List<V> values = new ArrayList<V>();
 
-    private SelectAdapter<T,V> adapter;
+    public SelectCell() { this(new HashMap<T, V>(), DEFAULT_TEMPLATE); }
 
-    public SelectCell(Map<T,V> options) {
-        this(new MapAdapter<T, V>(options));
+    public SelectCell(Map<T,V> opts) {
+        this(opts, DEFAULT_TEMPLATE);
+    }
 
-        List<T> opts = new ArrayList<T>();
 
-        for (Map.Entry<T,V> e : options.entrySet()) {
-            opts.add(e.getKey());
-        }
-
+    public SelectCell(Map<T,V> opts, Template template) {
+        super(BrowserEvents.CHANGE);
+        this.template = template;
         setOptions(opts);
     }
 
-
-    public SelectCell(SelectAdapter<T,V> adapter) {
-        this(adapter, DEFAULT_TEMPLATE);
-    }
-
-
-    public SelectCell(SelectAdapter<T,V> adapter, Template template) {
-        super(BrowserEvents.CHANGE);
-        this.adapter = adapter;
-        this.template = template;
-    }
-
-
-    public void setOptions(List<T> options) {
-        this.options.clear();
-        this.options.addAll(options);
-
-        this.values.clear();
-
-        for (T option : options) {
-            this.values.add(adapter.value(option));
+    public void setOptions(Map<T, V> opts) {
+        for (Map.Entry<T,V> e : opts.entrySet()) {
+            options.add(e.getKey());
+            values.add(e.getValue());
         }
     }
 
@@ -149,12 +102,12 @@ public class SelectCell<T,V> extends AbstractInputCell<V, V> {
         sb.appendHtmlConstant("<select tabindex=\"-1\">");
 
         for (int i = 0; i < options.size(); i++) {
-            String val = ""+values.get(i);
-            String desc = adapter.description(options.get(i));
+            V val = values.get(i);
+            T opt = options.get(i);
             if (selected != null && selected.equals(val)) {
-                sb.append(template.selectedOption(val, desc));
+                sb.append(template.selectedOption(""+val, ""+opt));
             } else {
-                sb.append(template.option(val, desc));
+                sb.append(template.option(""+val, ""+opt));
             }
         }
 

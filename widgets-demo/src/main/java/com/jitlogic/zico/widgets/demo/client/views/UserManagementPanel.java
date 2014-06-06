@@ -350,6 +350,7 @@ public class UserManagementPanel extends Composite {
     @UiHandler("btnOk")
     void saveChanges(ClickEvent e) {
         editMode(false);
+
         refreshUsers(e);
     }
 }
